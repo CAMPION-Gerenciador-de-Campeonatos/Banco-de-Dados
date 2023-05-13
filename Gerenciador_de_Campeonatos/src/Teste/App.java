@@ -3,15 +3,15 @@ package Teste;
 import DAO.*;
 import DTO.*;
 import java.util.Scanner;
-import java.io.*;
 
 public class App {
 
 	public static void main(String[] args) {
 
 		try (Scanner input = new Scanner(System.in)) {
+			
 			Usuario usuario = new Usuario();
-			Metodos metodos = new Metodos();
+			MetodosUsuario metodosUsuario = new MetodosUsuario();
 
 			int opcao_menu;
 			int opcao_editar;
@@ -19,7 +19,7 @@ public class App {
 			do {
 
 				System.out.println(
-						"\n________MENU________\n\n1 - CRIAR CONTA \n2 - FAZER LOGIN\n3 - FAZER LOGOUT\n4 - EDITAR CONTA\n5 - SAIR DA TELA\n");
+						"\n________MENU________\n\n1 - CRIAR CONTA \n2 - FAZER LOGIN\n3 - FAZER LOGOUT\n4 - EDITAR CONTA\n5 - REMOVER CONTA\n6 - SAIR DA TELA\n");
 				System.out.print("\nDigite a opção desejada: ");
 				opcao_menu = input.nextInt();
 
@@ -47,7 +47,7 @@ public class App {
 					usuario.setSenha(senha_usuario);
 					// usuario.setAvatar(imagemBytes);
 
-					metodos.criarConta(usuario);
+					metodosUsuario.criarConta(usuario);
 					break;
 
 				case 2:
@@ -60,18 +60,18 @@ public class App {
 					System.out.print("Senha: ");
 					String senha_login = input.nextLine();
 
-					metodos.fazerLogin(email_login, senha_login);
+					metodosUsuario.fazerLogin(email_login, senha_login);
 					break;
 
 				case 3:
 
-					metodos.fazerLogout();
+					metodosUsuario.fazerLogout();
 					break;
 
 				case 4:
 
 					do {
-						if (metodos.getUsuarioLogado() != null) {
+						if (metodosUsuario.getUsuarioLogado() != null) {
 
 							System.out.println(
 									"\n________MENU________\n\n1 - EDITAR NOME DE USUARIO\n2 - EDITAR EMAIL\n3 - EDITAR SENHA\n4 - EDITAR AVATAR\n5 - EDITAR TUDO\n6 - SAIR\n");
@@ -85,11 +85,11 @@ public class App {
 
 								input.nextLine();
 
-								System.out.println("Olá " + metodos.getUsuarioLogado().getNomeCompleto() + "!");
+								System.out.println("Olá " + metodosUsuario.getUsuarioLogado().getNomeCompleto() + "!");
 								System.out.print("\nDigite o novo nome de usuário: ");
 								nome_editado = input.nextLine();
 
-								metodos.editarNomeUsuario(nome_editado);
+								metodosUsuario.editarNomeUsuario(nome_editado);
 								break;
 
 							case 2:
@@ -98,11 +98,11 @@ public class App {
 
 								input.nextLine();
 
-								System.out.println("Olá " + metodos.getUsuarioLogado().getNomeCompleto() + "!");
+								System.out.println("Olá " + metodosUsuario.getUsuarioLogado().getNomeCompleto() + "!");
 								System.out.print("\nDigite o novo email: ");
 								email_editado = input.nextLine();
 
-								metodos.editarEmail(email_editado);
+								metodosUsuario.editarEmail(email_editado);
 
 								break;
 
@@ -112,17 +112,43 @@ public class App {
 
 								input.nextLine();
 
-								System.out.println("Olá " + metodos.getUsuarioLogado().getNomeCompleto() + "!");
+								System.out.println("Olá " + metodosUsuario.getUsuarioLogado().getNomeCompleto() + "!");
 								System.out.print("\nDigite a nova senha: ");
 								senha_editada = input.nextLine();
 
-								metodos.editarSenha(senha_editada);
+								metodosUsuario.editarSenha(senha_editada);
 
 								break;
 
-							/*
-							 * default: System.out.println("Opção inválida. Tente novamente."); break;
-							 */
+							case 4:
+
+								String avatar_editado;
+
+								break;
+
+							case 5:
+
+								input.nextLine();
+
+								System.out.println("Olá " + metodosUsuario.getUsuarioLogado().getNomeCompleto() + "!");
+								
+								System.out.print("\nDigite o novo nome completo: ");
+								nome_editado = input.nextLine();
+								System.out.print("Digite o novo e-mail: ");
+								email_editado = input.nextLine();
+								
+								//System.out.print("Digite o novo caminho para o avatar: ");
+								//avatar_editado = input.nextLine();
+								
+								System.out.println("\nDigite a senha atual: ");
+								String senha_atual = input.nextLine();
+								
+								System.out.print("\nDigite a nova senha: ");
+								senha_editada = input.nextLine();
+								
+								metodosUsuario.editarTudoUsuario(nome_editado, email_editado, senha_editada, senha_atual);
+
+								break;
 
 							}
 						} else {
@@ -132,12 +158,12 @@ public class App {
 
 					} while (opcao_editar != 6);
 
-					/*
-					 * default: System.out.println("Opção inválida. Tente novamente."); break;
-					 */
+				case 5:
+					
+					metodosUsuario.removerConta();
 				}
 
-			} while (opcao_menu != 5);
+			} while (opcao_menu != 6);
 		}
 
 	}
