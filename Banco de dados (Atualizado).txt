@@ -95,6 +95,7 @@ CREATE TABLE arvore_partidas (
   FOREIGN KEY (partida_id) REFERENCES partida(id)
 );
 
+ALTER TABLE usuarios MODIFY COLUMN avatar VARCHAR(255);
 
 
 
