@@ -95,9 +95,6 @@ CREATE TABLE arvore_partidas (
   FOREIGN KEY (partida_id) REFERENCES partida(id)
 );
 
-ALTER TABLE usuarios MODIFY COLUMN avatar VARCHAR(255);
-ALTER TABLE time MODIFY COLUMN imagem_escudo VARCHAR(255);
-
 ALTER TABLE time DROP FOREIGN KEY fk_competidor;
 ALTER TABLE time DROP column competidores_times_id;
 
