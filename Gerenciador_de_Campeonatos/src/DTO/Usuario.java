@@ -6,7 +6,7 @@ public class Usuario {
 	private String nomeCompleto;
 	private String email;
 	private String senha;
-	private byte[] avatar;
+	private String caminho_avatar;
 	private boolean logado;
 
 	public int getId() {
@@ -47,16 +47,13 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public byte[] getAvatar() {
-		return avatar;
-	}
+	public String getAvatar() {
+        return caminho_avatar;
+    }
 
-	public void setAvatar(byte[] avatar) {
-		if (avatar.length == 0) {
-			throw new IllegalArgumentException("O avatar deve ser selecionado");
-		}
-		this.avatar = avatar;
-	}
+    public void setAvatar(String caminhoAvatar) {
+        this.caminho_avatar = caminhoAvatar;
+    }
 	
 	public boolean isLogado() {
 		return logado;

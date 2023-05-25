@@ -1,5 +1,6 @@
 package DAO;
 
+import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,13 +32,14 @@ public class MetodosUsuario {
 				String sql = "INSERT INTO USUARIOS(NOME_COMPLETO, EMAIL, SENHA, AVATAR) VALUES (?, ?, ?, ?)";
 
 				PreparedStatement statement = connection.prepareStatement(sql);
-
+				
 				statement.setString(1, usuario.getNomeCompleto());
 				statement.setString(2, usuario.getEmail());
 				statement.setString(3, usuario.getSenha());
-				statement.setBytes(4, usuario.getAvatar());
+	            statement.setString(4, usuario.getAvatar());
 
-				statement.execute();
+
+				statement.executeUpdate();
 
 				System.out.println("Usuário inserido com sucesso!");
 
@@ -103,12 +105,12 @@ public class MetodosUsuario {
 
 			stat.setString(1, nome_atualizado);
 			stat.setInt(2, usuarioLogado.getId());
-
-			int result = stat.executeUpdate();
+			stat.executeUpdate();
+			
 			System.out.println("Nome de usuário atualizado");
 
-		} catch (Exception i) {
-			throw new RuntimeException("Erro ao conectar ao banco de dados.", i);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -124,12 +126,12 @@ public class MetodosUsuario {
 
 				stat.setString(1, email_atualizado);
 				stat.setInt(2, usuarioLogado.getId());
-
-				int result = stat.executeUpdate();
+				stat.executeUpdate();
+				
 				System.out.println("\nEmail atualizado!");
 
-			} catch (Exception i) {
-				throw new RuntimeException("Erro ao conectar ao banco de dados.", i);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -146,21 +148,37 @@ public class MetodosUsuario {
 
 				stat.setString(1, senha_atualizada);
 				stat.setInt(2, usuarioLogado.getId());
-
-				int result = stat.executeUpdate();
+				stat.executeUpdate();
+				
 				System.out.println("\nSenha atualizada!");
 
-			} catch (Exception i) {
-				throw new RuntimeException("Erro ao conectar ao banco de dados.", i);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
 
-	// public void editarAvatar(String avatar_atualizado)
+	public void editarAvatar(String avatar_atualizado) {
+	    try {
+	        Connection connection = ConectandoJavaBD.getInstance().getConnection();
 
-	public void editarTudoUsuario(String nome_editado, String email_editado, String senha_editada, String senha_atual) {
+	        String sql = "UPDATE USUARIOS SET AVATAR = ? WHERE ID = ?";
 
-		// falta adicionar avatar como parâmetro;
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        statement.setString(1, avatar_atualizado);
+	        statement.setInt(2, usuarioLogado.getId());
+
+	        System.out.println("Avatar atualizado com sucesso!");
+	        
+	        statement.executeUpdate();
+	      
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+
+	public void editarTudoUsuario(String nome_editado, String email_editado, String senha_editada, String senha_atual, String avatar_editado) {
 
 		editarNomeUsuario(nome_editado);
 		editarEmail(email_editado);
@@ -171,7 +189,7 @@ public class MetodosUsuario {
 			System.out.println("Senha incorreta!");
 		}
 
-		// editarAvatar(avatar_editado);
+		editarAvatar(avatar_editado);
 	}
 
 	public void removerConta() {
@@ -182,12 +200,12 @@ public class MetodosUsuario {
 					PreparedStatement stat = connec.prepareStatement(sql)) {
 
 				stat.setInt(1, usuarioLogado.getId());
-
-				int result = stat.executeUpdate();
+				stat.executeUpdate();
+				
 				System.out.println("Usuário excluído.");
 
-			} catch (Exception i) {
-				throw new RuntimeException("Erro ao conectar ao banco de dados.", i);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		} else {
 			System.out.println("Nenhum usuário está logado.");

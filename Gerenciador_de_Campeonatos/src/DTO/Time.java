@@ -4,9 +4,20 @@ public class Time {
 
 	private int id;
 	private String nome;
-	private byte[] imagem_escudo;
+	private String imagem_escudo;
 	private String abreviacao;
+	
+	public Time() {
+		
+	}
 
+	public Time(int id, String nome, String abreviacao, String imagem_escudo){
+		
+		this.id = id;
+		this.abreviacao = abreviacao;
+		this.nome = nome;
+		this.imagem_escudo = imagem_escudo;
+	}
 	public int getId() {
 		return id;
 	}
@@ -23,17 +34,13 @@ public class Time {
 		this.nome = nome;
 	}
 
-	public byte[] getImagem_escudo() {
-		return imagem_escudo;
-	}
+	public String getImagem_escudo() {
+        return imagem_escudo;
+    }
 
-	public void setImagem_escudo(byte[] imagem_escudo) {
-		// Validação do avatar
-		if (imagem_escudo.length == 0) {
-			throw new IllegalArgumentException("A imagem deve ser selecionado");
-		}
-		this.imagem_escudo = imagem_escudo;
-	}
+    public void setImagem_escudo(String imagem_escudo) {
+        this.imagem_escudo = imagem_escudo;
+    }
 
 	public String getAbreviacao() {
 		return abreviacao;
@@ -43,4 +50,12 @@ public class Time {
 		this.abreviacao = abreviacao;
 	}
 
+	@Override
+	public String toString() {
+		return id +" / "+ nome +" / "+ abreviacao +" / "+ imagem_escudo;
+	}
+	
+	
+
+	
 }
