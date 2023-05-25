@@ -104,6 +104,7 @@ ADD CONSTRAINT fk_usuario_id
 FOREIGN KEY (id_usuario) 
 REFERENCES usuarios(id);
 
-
+ALTER TABLE usuarios MODIFY COLUMN avatar VARCHAR(255);
+ALTER TABLE time MODIFY COLUMN imagem_escudo VARCHAR(255);
 
 
