@@ -145,12 +145,12 @@ public class MetodosTime {
 		editarAbreviacaoTime(nome_atual, abreviacao_atualizada);
 	}
 
-	public void removerTime(String nome) {
-		String sql = "DELETE FROM time WHERE nome = ?";
+	public void removerTime(int id) {
+		String sql = "DELETE FROM time WHERE id = ?";
 		try (Connection connec = ConectandoJavaBD.getInstance().getConnection();
 				PreparedStatement stat = connec.prepareStatement(sql)) {
 
-			stat.setString(1, nome);
+			stat.setInt(1, id);
 			stat.executeUpdate();
 
 			System.out.println("Time excluído.");

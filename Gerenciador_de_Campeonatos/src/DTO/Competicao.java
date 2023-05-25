@@ -9,6 +9,19 @@ public class Competicao {
 	private String premiacao;
 	private String esporte;
 	
+	public Competicao() {
+		
+	}
+	
+	public Competicao(int id, String nome, String descricao, int quantidade_times, String premiacao, String esporte) {
+		
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.quant_times = quantidade_times;
+		this.premiacao = premiacao;
+		this.esporte = esporte;
+	}
 	
 	public int getId() {
 		return id;
@@ -47,4 +60,8 @@ public class Competicao {
 		this.esporte = esporte;
 	}
 	
+	@Override
+	public String toString() {
+		return id +" / "+ nome +" / "+ quant_times +" / "+ esporte +" / "+ premiacao + " / " + descricao;
+	}
 }
