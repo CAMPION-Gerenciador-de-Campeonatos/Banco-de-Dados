@@ -107,4 +107,5 @@ REFERENCES usuarios(id);
 ALTER TABLE usuarios MODIFY COLUMN avatar VARCHAR(255);
 ALTER TABLE time MODIFY COLUMN imagem_escudo VARCHAR(255);
 
+ALTER TABLE competicao MODIFY premiacao VARCHAR(200) ;
 
